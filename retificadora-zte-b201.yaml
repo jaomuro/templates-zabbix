@@ -1,0 +1,1964 @@
+zabbix_export:
+  version: '6.4'
+  template_groups:
+    -
+      uuid: e8bf02d4b71b43dd9b064e63a77a882e
+      name: FCC
+  templates:
+    -
+      uuid: f3f9ef44e2894fd890f032d359ebc94a
+      template: 'Retificadora ZTE ZXDU68 B201'
+      name: 'Retificadora ZTE ZXDU68 B201'
+      groups:
+        -
+          name: FCC
+      items:
+        -
+          uuid: 22f6cf124df6477897d3d58ebb0e9dde
+          name: 'AC Power Off Alarm'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.3.1.1.0
+          key: acPowerOffAlarm
+          trends: '0'
+          valuemap:
+            name: 'Alarm Status'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Type
+              value: Alarm
+          triggers:
+            -
+              uuid: da304875672a48e980e8395d8be65d72
+              expression: 'last(/Retificadora ZTE ZXDU68 B201/acPowerOffAlarm)=1'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Retificadora ZTE ZXDU68 B201/acPowerOffAlarm)=0'
+              name: 'Falha AC'
+              priority: HIGH
+              description: 'Alarme de falha AC no equipamento. Confirmar no Device'
+              manual_close: 'YES'
+              tags:
+                -
+                  tag: Falha
+                  value: Elétrico
+        -
+          uuid: bd60cbae73c649ea8304884977abd6c9
+          name: 'AC Power Source'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.2.2.1.0
+          key: ACpowerSource
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'Power Source Type'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: d7adb42b25574d259d5b61ff542ec379
+          name: 'AC Power Supply Type'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.5.2.1.0
+          key: acPowerSupplyType
+          delay: 1h
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'AC Power Supply Type'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: 57364b625c504a8b874c662ae5ba2537
+          name: 'AC Save Energy Status'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.8.1.2.1.1.0
+          key: acSaveEnergyStatus
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'AC Save Energy Status'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: cb774db3825c46c6ac3defdbeeb5cb42
+          name: 'All SMR Commfail Alarm'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.8.1.3.2.1.0
+          key: allSMRCommfailAlarm
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'Alarm Status'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+            -
+              tag: Type
+              value: Alarm
+        -
+          uuid: 3a1c9717ea6b49a7b0cf906269f0aa21
+          name: 'Battery Detection Abnormal Alarm'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.12.1.3.4.1.0
+          key: batteryDetectionAbnormalAlarm
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'Alarm Status'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+            -
+              tag: Type
+              value: Alarm
+        -
+          uuid: d4c6270bae144675b631d5a5b7f30810
+          name: 'Battery Group Total Current'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.12.1.1.1.1.0
+          key: batteryGroupTotalCurrent
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 853f7dc11df44f4cbca0657fd595d790
+          name: 'Battery Status'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.2.1.1.0
+          key: batteryStatus
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'Battery Status'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: 4ba49f9410684de7ae0baa606324e8ee
+          name: 'Battery Status Duration'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.5.1.0
+          key: batteryStatusDuration
+          delay: 2m
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: afd9cef224014a7dab4fe45109bf200d
+          name: 'Battery Testing Alarm'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.12.1.3.6.1.0
+          key: BatteryTestingAlarm
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'Alarm Status'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+            -
+              tag: Type
+              value: Alarm
+        -
+          uuid: 8f07d6893a514b4fbc913f05f678c955
+          name: 'Battery Total Current'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.4.1.0
+          key: batteryTotalCurrent
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: f8712358249540dfb5bc861d9fb7325c
+          name: 'Boot Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.4.1.0
+          key: bootVersion
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: 9438c53f6c064d6c8cd5f9bcc483852c
+          name: 'CPU Usage'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.1.1.1.0
+          key: cpuUsage
+          delay: 3m
+          history: 30d
+          trends: '0'
+          tags:
+            -
+              tag: Application
+              value: Performance
+        -
+          uuid: 377293bb55af4fd1929a9ec671137c72
+          name: 'DC Load Total Current'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.13.1.1.2.1.0
+          key: dcLoadTotalCurrent
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+            -
+              tag: Type
+              value: DC
+        -
+          uuid: bd1729eea294459e8632802692b4bb23
+          name: 'DC Load Total Power'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.13.1.1.3.1.0
+          key: dcLoadTotalPower
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: kW
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+            -
+              tag: Type
+              value: DC
+        -
+          uuid: 27e627657ccb4cc6a36365852e6dafdf
+          name: 'DC Voltage Load'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.13.1.1.1.1.0
+          key: dcVoltageLoad
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+            -
+              tag: Type
+              value: DC
+        -
+          uuid: c28c559fd87748da9a10d7b0a706a76b
+          name: 'DC Voltage Out'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.1.1.0
+          key: dcVoltageOut
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: b44f254e188a4e6ca006b4e31d96dbd5
+          name: 'DC Voltage Too High Alarm'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.10.1.3.14.1.0
+          key: dcVoltageTooHighAlarm
+          history: 30d
+          trends: '0'
+          valuemap:
+            name: 'Alarm Status'
+          tags:
+            -
+              tag: Type
+              value: Alarm
+            -
+              tag: Type
+              value: DC
+        -
+          uuid: 9a4f996b81054e888166d7ccd7429dd1
+          name: 'DC Voltage Too Low Alarm'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.10.1.3.15.1.0
+          key: dcVoltageTooLowAlarm
+          history: 30d
+          trends: '0'
+          valuemap:
+            name: 'Alarm Status'
+          tags:
+            -
+              tag: Type
+              value: Alarm
+            -
+              tag: Type
+              value: DC
+        -
+          uuid: 07926a75532947fda7dc8ced5422af25
+          name: 'ICMP ping'
+          type: SIMPLE
+          key: icmpping
+          history: 1w
+          trends: '0'
+          valuemap:
+            name: 'Service state'
+          tags:
+            -
+              tag: Application
+              value: Status
+          triggers:
+            -
+              uuid: 588133b967ef4df3bd39cc232fed5e28
+              expression: 'max(/Retificadora ZTE ZXDU68 B201/icmpping,#3)=0'
+              name: 'Inacessível por ICMP ping'
+              priority: HIGH
+              tags:
+                -
+                  tag: Falha
+                  value: ICMP
+        -
+          uuid: 8e8612a7b0f34901ac764132799d65b8
+          name: 'iDDB Release'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.14.1.0
+          key: iDDBRelease
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: 8f337c26e0e84f29ba394243ed0871df
+          name: 'iDDB Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.11.1.0
+          key: iDDBVersion
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: 3382a60828094250b1e48e8f25e5412c
+          name: 'Kernel Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.5.1.0
+          key: kernelVersion
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: a288073e79f8447e92bc38d296a6dc3e
+          name: 'Load Total Current'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.2.1.0
+          key: loadTotalCurrent
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 56073575bc0d45bdb0140baa6f5d4ac8
+          name: 'Load Total Power'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.3.1.0
+          key: loadTotalPower
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: kW
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 6c941c1578c94115a92c06060480f6c2
+          name: 'Mac Address'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.12.1.0
+          key: macAddress
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: 479335e1574d4ff6941f559a5b87e60f
+          name: 'Manufactory Name'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.7.1.0
+          key: manufactoryName
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: dd97ab7ba98d445e9b7fe2f6954c0a3c
+          name: 'Memory Usage'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.1.2.1.0
+          key: memoryUsage
+          delay: 3m
+          history: 30d
+          trends: '0'
+          tags:
+            -
+              tag: Application
+              value: Performance
+        -
+          uuid: 755853680ec4481ba14ee6f6450ae9bf
+          name: 'Phase AC Voltage 1'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.1.3.1.0
+          key: phaseACVoltage1
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
+              error_handler: CUSTOM_VALUE
+              error_handler_params: '0'
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '300'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 5d4a4598f79a45b4bc6eb15fc8866932
+          name: 'Phase AC Voltage 2'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.1.4.1.0
+          key: phaseACVoltage2
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
+              error_handler: CUSTOM_VALUE
+              error_handler_params: '0'
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '300'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 83153989881e4edb8733875f5c872dd7
+          name: 'Phase AC Voltage 3'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.1.5.1.0
+          key: phaseACVoltage3
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: V
+          preprocessing:
+            -
+              type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
+              error_handler: CUSTOM_VALUE
+              error_handler_params: '0'
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '300'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 52ffba0313ea404bbb2e8dbfb4826a85
+          name: 'Phase Current 1'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.1.9.1.0
+          key: phaseCurrent1
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
+              error_handler: CUSTOM_VALUE
+              error_handler_params: '0'
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '300'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: d4f53bd460e34cf785d7d37c404f21ff
+          name: 'Phase Current 2'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.1.10.1.0
+          key: phaseCurrent2
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
+              error_handler: CUSTOM_VALUE
+              error_handler_params: '0'
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '300'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 4da265ddaf744206862383391538db0f
+          name: 'Phase Current 3'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.3.1.1.11.1.0
+          key: phaseCurrent3
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: CHECK_NOT_SUPPORTED
+              parameters:
+                - ''
+              error_handler: CUSTOM_VALUE
+              error_handler_params: '0'
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '300'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 47c82ef788cd47f78c51d68c4a7b6cbc
+          name: 'Plataform Release'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.9.1.0
+          key: plataformRelease
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: c371a36eaaff4b3cac49de35ffb8f49f
+          name: 'Serial Number'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.1.1.0
+          key: serialNumber
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: bc383a3f5b73416ebfffa77247b7b383
+          name: 'SMRG Next Rotate Time'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.8.1.6.1.1.0
+          key: smrgNextRotateTime
+          history: 15d
+          trends: '0'
+          value_type: TEXT
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: 1c088f592bf74492baf2957f2b39bb33
+          name: 'SMRG Online Number'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.8.1.1.5.1.0
+          key: smrgOnlineNumber
+          history: 15d
+          trends: '0'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: e602ccb7977f43288cb9f0f44aeca15a
+          name: 'SMRG Rotated Period'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.8.1.5.2.1.0
+          key: smrgRotatedPeriod
+          history: 15d
+          trends: '0'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: b25edd28b0d046d484d3eb4ca04ab0fa
+          name: 'SMRG Total Output Current'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.8.1.1.1.1.0
+          key: smrgTotalOutputCurrent
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 52d6557335ba4dce8e8e108219ef2459
+          name: 'SMRG Working Number'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.8.1.1.4.1.0
+          key: smrgWorkingNumber
+          history: 15d
+          trends: '0'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: ee5ba181a89d4902a9bb9d47394963fd
+          name: 'SMR Total Online'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.10.1.0
+          key: smrTotalOnline
+          history: 15d
+          trends: '0'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: ce5e160486a84177894bd1fbf52d3d77
+          name: 'SMR Total Output Current'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.6.1.0
+          key: smrTotalOutCurrent
+          history: 30d
+          trends: '0'
+          value_type: FLOAT
+          units: A
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.0001'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: c8092961cc634ff7801ff23a8e2032e8
+          name: 'SMR Total Working'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.1.9.1.0
+          key: smrTotalWorking
+          history: 15d
+          trends: '0'
+          tags:
+            -
+              tag: Application
+              value: Elétrico
+        -
+          uuid: 19c7be5ae28848df823a343ca6e05b15
+          name: 'Software Name'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.3.1.0
+          key: softwareName
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: 0cd03c74cad94285b1d3eb3f9c29f00e
+          name: 'Software Plataform Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.2.1.0
+          key: softwarePlataformVersion
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: d8558b79e210453d8d41e47a99d5b876
+          name: 'Software Release'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.8.1.0
+          key: softwareRelease
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: c1a6fa08affd4c44b71bfdfc9fee42dd
+          name: 'Software Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.6.1.0
+          key: softwareVersion
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: 0be91b0c800340d99b34ce654d53a704
+          name: 'System Overload Alarm'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.2.1.3.2.1.0
+          key: systemOverloadAlarm
+          history: 15d
+          trends: '0'
+          valuemap:
+            name: 'Alarm Status'
+          preprocessing:
+            -
+              type: DISCARD_UNCHANGED_HEARTBEAT
+              parameters:
+                - '600'
+          tags:
+            -
+              tag: Application
+              value: Informação
+            -
+              tag: Type
+              value: Alarm
+        -
+          uuid: e06e8bbd513942feaaf9efff6dd3ac56
+          name: Uptime
+          type: SNMP_AGENT
+          snmp_oid: 'SNMPv2-MIB::sysUpTime.0'
+          key: sysUpTime
+          delay: 5m
+          history: 31d
+          trends: '0'
+          units: uptime
+          preprocessing:
+            -
+              type: MULTIPLIER
+              parameters:
+                - '0.01'
+          tags:
+            -
+              tag: Application
+              value: Informação
+        -
+          uuid: 3c92a95b50994a5da5b1112e1aa311a1
+          name: 'uIB Release'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.13.1.0
+          key: uIBRelease
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: fba1266fa9aa4e16a5703b08bd9d01e6
+          name: 'uIB Type'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.17.1.0
+          key: uIBType
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+        -
+          uuid: f336d8b41ee34ae2926535154651bccf
+          name: 'uIB Version'
+          type: SNMP_AGENT
+          snmp_oid: 1.3.6.1.4.1.3902.2800.4.1.1.8.10.1.0
+          key: uIBVersion
+          delay: 1d
+          history: 7d
+          trends: '0'
+          value_type: TEXT
+          tags:
+            -
+              tag: Device
+              value: Info
+      discovery_rules:
+        -
+          uuid: 866eb924cf8c4c719391d8fd490d92cb
+          name: 'Discovery Power System AC'
+          type: SNMP_AGENT
+          snmp_oid: 'discovery[{#VOLTAGE},1.3.6.1.4.1.3902.2800.4.2.1.1.12.1.1.2]'
+          key: discovery.powerSystemAC
+          delay: 6h
+          filter:
+            conditions:
+              -
+                macro: '{#VOLTAGE}'
+                value: ^-2147483648
+                operator: NOT_MATCHES_REGEX
+                formulaid: A
+          lifetime: 10d
+          item_prototypes:
+            -
+              uuid: cb657c3d3c5e408cadbbc99054362fe9
+              name: 'AC Current High Alarm #{#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.3.1.3.4.1.1.2.{#SNMPINDEX}'
+              key: 'acCurrentHighAlarm[{#SNMPINDEX}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '600'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+            -
+              uuid: 945309a013194c42afa8266bb17af744
+              name: 'AC Phase Lack Alarm #{#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.3.1.3.2.1.1.2.{#SNMPINDEX}'
+              key: 'acPhaseLackAlarm[{#SNMPINDEX}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '600'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+            -
+              uuid: 67d7da495cf8430ca2d0554ff7052104
+              name: 'AC Voltage Low Alarm #{#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.3.1.3.3.1.1.2.{#SNMPINDEX}'
+              key: 'acVoltageLowAlarm[{#SNMPINDEX}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '600'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+            -
+              uuid: 50c75ab3a2804d0599e0a8dfba13e50d
+              name: 'Power System AC Current #{#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.2.1.1.13.1.1.2.{#SNMPINDEX}'
+              key: 'powerSystemACCurrent[{#SNMPINDEX}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: A
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+            -
+              uuid: efbdcbd38bcd48ada829dbb574c8c0eb
+              name: 'Power System AC Voltage #{#SNMPINDEX}'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.2.1.1.12.1.1.2.{#SNMPINDEX}'
+              key: 'powerSystemACVoltage[{#SNMPINDEX}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: V
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+        -
+          uuid: 38b39c6ccf0f4b4fa76f882483176574
+          name: 'Discovery Battery'
+          type: SCRIPT
+          key: discoveryBattery
+          delay: 1d
+          params: |
+            var objectsArray = [];
+            var number = "{$BATTERYNUMBER}";
+                for (var i = 1; i <= number; i++) {
+                    var object = {
+                        "{#SNMPINDEX}": i.toString(),
+                        "{#BATTERYNUMBER}": "Bateria #" + i.toString()
+                    };
+                    objectsArray.push(object);
+                }
+            
+                var jsonString = JSON.stringify(objectsArray, null, 2);
+                return jsonString;
+          item_prototypes:
+            -
+              uuid: 379a50ba2af74fb9b951fba9117d1cde
+              name: 'Battery {#SNMPINDEX} Charge Accumulated Duration'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.3.1.0'
+              key: 'batteryChargeAccumulatedDuration[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 6629791c419842f2b1b90972b9c3a457
+              name: 'Battery {#SNMPINDEX} Charge Capacity'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.4.1.0'
+              key: 'batteryChargeCapacity[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: Ah
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 0a9165698d3241308669c83c219414ab
+              name: 'Battery {#SNMPINDEX} Charge Power'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.5.1.0'
+              key: 'batteryChargePower[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: kWh
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: ecc857ccd0214a909735c63a0a4122b2
+              name: 'Battery {#SNMPINDEX} Charge Times'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.7.1.0'
+              key: 'batteryChargeTimes[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 0a109649172d46639405c9e89a14cd6a
+              name: 'Battery {#SNMPINDEX} Current'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.1.3.1.0'
+              key: 'batteryCurrent[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: A
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 5a934ece72a7423ca8c2f65cc5222677
+              name: 'Battery {#SNMPINDEX} Discharge Accumulated Duration'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.6.1.0'
+              key: 'batteryDischargeAccumulatedDuration[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: fd4901634e834c6eb7f19afd5feb081b
+              name: 'Battery {#SNMPINDEX} Discharge Alarm'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.3.7.1.0'
+              key: 'batteryDischargeAlarm[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '600'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 18db4b2fee74448c983b9386d623e0f5
+              name: 'Battery {#SNMPINDEX} Discharge Power'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.2.1.0'
+              key: 'batteryDischargePower[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: kWh
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 8e3467e964b547afa57cf39f1bb030c2
+              name: 'Battery {#SNMPINDEX} Discharge Times'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.9.1.0'
+              key: 'batteryDischargeTimes[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: bd65c7de3d974c5480633a386a438456
+              name: 'Battery {#SNMPINDEX} Present Capacity'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.1.9.1.0'
+              key: 'batteryPresentCapacity[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: Ah
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 166b2df87445426da9068d046992cbd3
+              name: 'Battery {#SNMPINDEX} Present SOC'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.1.6.1.0'
+              key: 'batteryPresentSOC[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: '%'
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: d15e29b129304df49b858274e8a0ca1f
+              name: 'Battery {#SNMPINDEX} Present SOH'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.1.8.1.0'
+              key: 'batteryPresentSOH[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: '%'
+              description: 'Saúde da Bateria'
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: cba64458aed14436b7cd757b7e7d80ae
+              name: 'Battery {#SNMPINDEX} Test Fail Alarm'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.3.10.1.0'
+              key: 'batteryTestFailAlarm[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '600'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 29ef05506668496685606e26bcd16b38
+              name: 'Battery {#SNMPINDEX} Test Times'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.7.10.1.0'
+              key: 'batteryTestTimes[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 39b0b7d9316e4d0ab8031d8aed90f286
+              name: 'Battery {#SNMPINDEX} Voltage Too Low Alarm'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.3.11.1.0'
+              key: 'batteryVoltageTooLowAlarm[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '600'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+                -
+                  tag: Type
+                  value: Battery
+            -
+              uuid: 32dc05d8c28642cfae8168a809aa897a
+              name: 'Battery {#SNMPINDEX} Voltage'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.11.{#SNMPINDEX}.1.1.1.0'
+              key: 'batteryVoltage[{#BATTERYNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: V
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+                -
+                  tag: Type
+                  value: Battery
+        -
+          uuid: 48de78c127a84001850fd292515869f0
+          name: 'Discovery Rectifier'
+          type: SCRIPT
+          key: discoveryRectifier
+          delay: 1d
+          params: |
+            var objectsArray = [];
+            var number = "{$RECTIFIERNUMBER}";
+                for (var i = 1; i <= number; i++) {
+                    var object = {
+                        "{#SNMPINDEX}": i.toString(),
+                        "{#RECTIFIERNUMBER}": "Retificador #" + i.toString()
+                    };
+                    objectsArray.push(object);
+                }
+            
+                var jsonString = JSON.stringify(objectsArray, null, 2);
+                return jsonString;
+          lifetime: 15d
+          item_prototypes:
+            -
+              uuid: 938ebbf2b1074597b8b67ebe94551481
+              name: 'SMR {#RECTIFIERNUMBER} Barcode'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.8.11.1.0'
+              key: 'smrBarcode[{#RECTIFIERNUMBER}]'
+              delay: 1d
+              history: 30d
+              trends: '0'
+              value_type: TEXT
+              tags:
+                -
+                  tag: Type
+                  value: Info
+            -
+              uuid: 13fee85dd1a64e97a9184e1919241cc6
+              name: 'SMR {#RECTIFIERNUMBER} Communication Fail Alarm'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.3.29.1.0'
+              key: 'smrCommunicationFailAlarm[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+            -
+              uuid: 575dc024d0624f019f8348d706332bd0
+              name: 'SMR {#RECTIFIERNUMBER} Fan Control State'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.2.10.1.0'
+              key: 'smrFanControlState[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              valuemap:
+                name: 'SMR Fan Control State'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Status
+            -
+              uuid: 71470e74f8b649cba67b4cdc250ddfcd
+              name: 'SMR {#RECTIFIERNUMBER} Fan Speed'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.10.1.0'
+              key: 'smrFanSpeed[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: RPM
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Status
+            -
+              uuid: 15c39ef0f88e4af78d13ece06f2d16ac
+              name: 'SMR {#RECTIFIERNUMBER} Work Status'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.2.12.1.0'
+              key: 'smrFanWorkStatus[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              valuemap:
+                name: 'SMR Work Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Status
+            -
+              uuid: 5a3228603d964e7b83c327e7ea53a117
+              name: 'SMR {#RECTIFIERNUMBER} Fault Alarm'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.3.39.1.0'
+              key: 'smrFaultAlarm[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              valuemap:
+                name: 'Alarm Status'
+              preprocessing:
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Type
+                  value: Alarm
+            -
+              uuid: 41fab8f46b564a68a61cad5d2e717eec
+              name: 'SMR {#RECTIFIERNUMBER} ID'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.8.1.1.0'
+              key: 'smrID[{#RECTIFIERNUMBER}]'
+              delay: 1d
+              history: 30d
+              trends: '0'
+              value_type: TEXT
+              tags:
+                -
+                  tag: Type
+                  value: Info
+            -
+              uuid: 8b1683c1e3604041b320c060afde35db
+              name: 'SMR {#RECTIFIERNUMBER} In Power'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.8.1.0'
+              key: 'smrInPower[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: W
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+            -
+              uuid: 275e26b9d8ad4e51ab3df4e285dd6bae
+              name: 'SMR {#RECTIFIERNUMBER} Input Current'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.6.1.0'
+              key: 'smrInputCurrent[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: A
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+            -
+              uuid: f7d6b64144754920ae261be24a2d07e8
+              name: 'SMR {#RECTIFIERNUMBER} Input Voltage'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.5.1.0'
+              key: 'smrInputVoltage[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: V
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+            -
+              uuid: dae462f5a6a6455a9eb361c960b7356a
+              name: 'SMR {#RECTIFIERNUMBER} Internal Temperature'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.3.1.0'
+              key: 'smrInternalTemperature[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: C
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Temperatura
+            -
+              uuid: 853fa90bdc2c4d92abca7dc4a41cc2b5
+              name: 'SMR {#RECTIFIERNUMBER} Out Power'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.9.1.0'
+              key: 'smrOutPower[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: W
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+            -
+              uuid: a058850a05aa4d9db43b4bbd07c37f19
+              name: 'SMR {#RECTIFIERNUMBER} Output Current'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.2.1.0'
+              key: 'smrOutputCurrent[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: A
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+            -
+              uuid: 7d75164f37a449e7949f6eec8c560000
+              name: 'SMR {#RECTIFIERNUMBER} Output Voltage'
+              type: SNMP_AGENT
+              snmp_oid: '1.3.6.1.4.1.3902.2800.4.7.{#SNMPINDEX}.1.1.1.0'
+              key: 'smrOutputVoltage[{#RECTIFIERNUMBER}]'
+              history: 30d
+              trends: '0'
+              value_type: FLOAT
+              units: V
+              preprocessing:
+                -
+                  type: MULTIPLIER
+                  parameters:
+                    - '0.0001'
+                -
+                  type: DISCARD_UNCHANGED_HEARTBEAT
+                  parameters:
+                    - '300'
+              tags:
+                -
+                  tag: Application
+                  value: Elétrico
+      tags:
+        -
+          tag: class
+          value: 'Power Supply'
+        -
+          tag: target
+          value: ZTE
+      valuemaps:
+        -
+          uuid: a414716bce5b47668bf8c7cfea942b82
+          name: 'AC Power Supply Type'
+          mappings:
+            -
+              value: '0'
+              newvalue: L1L2L3N-220V
+            -
+              value: '1'
+              newvalue: L1L2L3-110V
+            -
+              value: '2'
+              newvalue: L1N-220V
+            -
+              value: '3'
+              newvalue: L1L2-110V
+        -
+          uuid: 96e7378e58c044018dd77ec7cffa2690
+          name: 'AC Save Energy Status'
+          mappings:
+            -
+              value: '0'
+              newvalue: Safe
+            -
+              value: '1'
+              newvalue: 'Free Mode'
+            -
+              value: '2'
+              newvalue: 'Auto NonSave'
+            -
+              value: '3'
+              newvalue: 'Auto Save'
+            -
+              value: '4'
+              newvalue: 'Temp NonSave'
+            -
+              value: '5'
+              newvalue: 'Perm NonSave'
+            -
+              value: '6'
+              newvalue: 'Manual Detect'
+        -
+          uuid: bf4a97d10e9347bf90d2fdeb9ace9ed7
+          name: 'Alarm Status'
+          mappings:
+            -
+              value: '0'
+              newvalue: cleared
+            -
+              value: '1'
+              newvalue: active
+        -
+          uuid: 5c6cdb663d3549debb69f75c5c2a70a7
+          name: 'Battery Status'
+          mappings:
+            -
+              value: '0'
+              newvalue: Float
+            -
+              value: '1'
+              newvalue: Equal
+            -
+              value: '2'
+              newvalue: Test
+            -
+              value: '3'
+              newvalue: PowerOff
+            -
+              value: '4'
+              newvalue: Detect
+            -
+              value: '5'
+              newvalue: Transition
+            -
+              value: '6'
+              newvalue: Charge
+        -
+          uuid: 52a23d6e00a34d7093f5d2867838cf30
+          name: 'Power Source Type'
+          mappings:
+            -
+              value: '0'
+              newvalue: 'Null'
+            -
+              value: '1'
+              newvalue: Unknow
+            -
+              value: '2'
+              newvalue: DG1
+            -
+              value: '3'
+              newvalue: DG2
+            -
+              value: '4'
+              newvalue: AC1
+            -
+              value: '5'
+              newvalue: AC2
+        -
+          uuid: dc77ce542f8f49aa8202b69313921b7e
+          name: 'Service state'
+          mappings:
+            -
+              value: '0'
+              newvalue: Down
+            -
+              value: '1'
+              newvalue: Up
+        -
+          uuid: f7cce06036114a31ac9b292aa7899066
+          name: 'SMR Fan Control State'
+          mappings:
+            -
+              value: '0'
+              newvalue: Auto
+            -
+              value: '1'
+              newvalue: 'Full Speed'
+        -
+          uuid: 7b9ec95c7dc74fd6afc85f9ed7597613
+          name: 'SMR Work Status'
+          mappings:
+            -
+              value: '0'
+              newvalue: 'Null'
+            -
+              value: '1'
+              newvalue: Normal
+            -
+              value: '2'
+              newvalue: Alarm
+            -
+              value: '3'
+              newvalue: CommFail
+            -
+              value: '4'
+              newvalue: Update
